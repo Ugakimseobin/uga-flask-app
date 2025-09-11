@@ -9,7 +9,8 @@ import os
 #from pyngrok import ngrok
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:ugahan582818@localhost:3306/ugamedical'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:ugahan582818@localhost:3306/ugamedical'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///mydb.sqlite3'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'your_secret_key'
 
