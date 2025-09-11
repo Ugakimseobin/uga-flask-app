@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block title %}마이페이지{% endblock %}
+
+{% block content %}
+<main class="my-page">
+
+    <!-- 좌측 메뉴 -->
+    <nav class="side-menu">
+        <ul>
+            <li><a href="javascript:void(0)" class="menu-item active" data-tab="profile">개인정보 수정</a></li>
+            <li><a href="javascript:void(0)" class="menu-item" data-tab="orders">주문내역</a></li>
+            <li><a href="javascript:void(0)" class="menu-item" data-tab="cart">장바구니</a></li>
+            <li><a href="javascript:void(0)" class="menu-item" data-tab="change_password">비밀번호 변경</a></li>
+        </ul>
+    </nav>
+
+    <!-- 우측 내용 영역 -->
+    <div class="tab-contents">
+
+        <!-- 개인정보 수정 -->
+        <div id="profile" class="tab-content">
+            <h3>개인정보 수정</h3>
+            <form action="{{ url_for('edit_profile') }}" method="POST">
+                <label>이름:</label>
+                <input type="text" name="name" value="{{ user.name }}"><br>
+                <label>직함:</label>
+                <input type="text" name="title" value="{{ user.title }}"><br>
+                <label>소속:</label>
+                <input type="text" name="affiliation" value="{{ user.affiliation }}"><br>
+                <label>기본주소:</label>
+                <input type="text" name="base_address" value="{{ user.base_address }}"><br>
+                <label>상세주소:</label>
+                <input type="text" name="detail_address" value="{{ user.detail_address }}"><br>
+                <label>전화번호:</label>
+                <input type="text" name="phone" value="{{ user.phone }}"><br>
+                <button type="submit" class="btn-save">수정</button>
+            </form>
+        </div>
+
+        <!-- 주문내역 -->
+        <div id="orders" class="tab-content">
+            <h3>주문내역</h3>
+            {% if orders %}
+            <ul class="order-list">
+                {% for order in orders %}
+                <li>
+                    <strong>주문번호:</strong> {{ order.id }} |
+                    <strong>총 금액:</strong> {{ order.total_price }}원 |
+                    <strong>날짜:</strong> {{ order.created_at.strftime('%Y-%m-%d') }}
+                    <ul>
+                        {% for item in order.items %}
+                        <li>{{ item.product.name }} × {{ item.quantity }}개 ({{ item.price }}원)</li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>주문내역이 없습니다.</p>
+            {% endif %}
+        </div>
+
+        <!-- 장바구니 -->
+        <div id="cart" class="tab-content">
+            <h3>장바구니</h3>
+            <ul id="cart-items-list-page"></ul>
+            <div class="cart-total">총합: <span id="cart-total-page">0</span>원</div>
+            <button type="button" id="checkout-btn-page" class="btn-checkout">구매하기</button>
+        </div>
+
+        <!-- 비밀번호 변경 -->
+        <div id="change_password" class="tab-content">
+            <h3>비밀번호 변경</h3>
+            <form id="change-password-form">
+                <label>새 비밀번호:</label>
+                <input type="password" name="new_password" required><br>
+                <label>비밀번호 확인:</label>
+                <input type="password" name="confirm_password" required><br>
+                <button type="submit" class="btn-save">변경</button>
+            </form>
+        </div>
+
+    </div>
+</main>
+{% endblock %}

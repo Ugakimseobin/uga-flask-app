@@ -1,0 +1,133 @@
+.signup_main {
+    max-width: 810px;
+    margin: 50px auto;
+    font-size: 1.1em;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.signup_main h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #0077cc;
+}
+
+.signup_main .form-group label {
+    display: block;
+    margin-top: 15px;
+    font-weight: 500;
+}
+
+.signup_main .form-group input,
+.signup_main .form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #0077cc;
+    border-radius: 6px;
+    margin-top: 5px;
+    font-size: 16px;
+}
+
+.signup_main .form-group input[readonly] {
+    background-color: #f9f9f9;
+    cursor: not-allowed;
+}
+
+.signup_main .form-group #address_detail {
+    margin-top: 10px;
+}
+
+.signup_main .form-group .email,
+.signup_main .form-group .address-field {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.signup_main .form-group .email input {
+    flex: 1;
+}
+
+.signup_main .form-group .email select {
+    width: 150px;
+}
+
+.signup_main .form-group .address-field #postcode {
+    width: 150px;
+}
+
+.signup_main .form-group .address-field button {
+    padding: 14px 20px;
+    border: none;
+    background-color: #0077cc;
+    color: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.signup_main .form-group .address-field button:hover {
+    background-color: #005fa3;
+}
+
+.signup_main .terms {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.signup_main .terms label {
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.signup_main .form-group button[type="submit"] {
+    width: 100%;
+    padding: 14px;
+    margin-top: 25px;
+    background-color: #0077cc;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.signup_main .form-group button[type="submit"]:hover {
+    background-color: #005fa3;
+}
+
+/* 약관 동의 */
+.terms-box {
+    margin-top: 2em;
+    border: 1px solid #ddd;
+    padding: 1.5em;
+    border-radius: 8px;
+    background: #f9f9f9;
+}
+
+.terms-box h4 {
+    margin-top: 1em;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.terms-content {
+    max-height: 120px;    /* 스크롤 가능 */
+    overflow-y: auto;
+    background: #fff;
+    padding: 1em;
+    border: 1px solid #ccc;
+    margin: 0.5em 0;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.terms-box label {
+    display: block;
+    margin: 0.5em 0 1em 0;
+    font-size: 14px;
+}

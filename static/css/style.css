@@ -1,0 +1,85 @@
+@charset "UTF-8";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Helvetica', sans-serif;
+}
+
+body {
+    background-color: #ffffff;
+    color: #000;
+}
+
+@media (min-width: 1200px) {
+    .container {
+        width: 1170px;
+    }
+}
+@media (min-width: 992px) {
+    .container {
+        width: 970px;
+    }
+}
+@media (min-width: 768px) {
+    .container {
+        width: 750px;
+    }
+}
+
+@media (max-width: 768px) {
+    .menu li.dropdown .dropdown-menu {
+        position: static; /* 모바일에서는 그냥 아래에 나오게 */
+        box-shadow: none;
+    }
+}
+
+/* 반응형 디자인 */
+@media (max-width: 480px) {
+    #header {
+        height: 4em;
+        font-size: 1em;
+    }
+
+    #header .logo {
+        font-size: 20px;
+    }
+
+    #header .menu {
+        display: none;
+    }
+
+    #moreMenu {
+        display: inline-block;
+    }
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+    .product-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .product-page h1 {
+        font-size: 1.8em;
+    }
+    .product-info h3 {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 991px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 767px) {
+  .site-footer {
+    padding-bottom: 0;
+  }
+}

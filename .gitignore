@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pyc# Virtual Environment
+venv/
+env/
+
+# IDE / 에디터
+.vscode/
+.idea/
+
+# 환경 변수
+.env
+
+# DB 파일
+*.sqlite3
+
+# 로그
+*.log
+
+# 폴더 무시할 땐 / 를 쓴다

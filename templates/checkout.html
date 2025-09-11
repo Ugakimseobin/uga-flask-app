@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}결제하기{% endblock %}
+
+{% block content %}
+<div class="checkout-page">
+    <div class="container">
+        <h2>주문/결제</h2>
+        <div class="checkout-wrapper">
+            <!-- 왼쪽: 배송지 / 상품 / 결제수단 -->
+            <div class="checkout-left">
+
+                <!-- 배송지 -->
+                <div class="checkout-section">
+                    <h3>배송지</h3>
+                    <div class="address-field">
+                        <button type="button" id="findAddress">주소찾기</button>
+                    </div>
+                    <div class="address-df">
+                        <input type="text" id="delivery-address" name="address" value="{{ session.get('user_base_address', '') }}" placeholder="배송지를 입력해주세요" readonly required>
+                        <input type="text" id="delivery-address-detail" name="address_detail" value="{{ session.get('user_detail_address', '') }}" placeholder="상세 주소 입력">
+                    </div>
+                </div>
+
+                <!-- 상품 목록 -->
+                <div class="checkout-section">
+                    <h3>주문 상품</h3>
+                    <div id="checkout-items"></div>
+                </div>
+
+                <!-- 결제 수단 -->
+                <div class="checkout-section">
+                    <h3>결제 수단</h3>
+                    <label><input type="radio" name="payment_method" value="card" checked> 신용/체크카드</label>
+                    <label><input type="radio" name="payment_method" value="kakao"> 카카오페이</label>
+                    <label><input type="radio" name="payment_method" value="naver"> 네이버페이</label>
+                </div>
+
+            </div>
+
+            <!-- 오른쪽: 총 결제금액 + 결제버튼 -->
+            <div class="checkout-right">
+                <div class="checkout-summary">
+                    <h3>결제 정보</h3>
+                    <p>총 상품 금액: <span id="checkout-total">0</span></p>
+                    <button id="pay-btn">결제하기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<script>
+    // 가입 완료 팝업
+    alert("✅ 회원가입이 완료되었습니다!");
+
+    // 1.5초 후 로그인 모달 자동 실행
+    setTimeout(function() {
+        window.location.href = "/?show_login=1";
+    }, 1500);
+</script>
+{% endblock %}

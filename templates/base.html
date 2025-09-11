@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}UGA Medical{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/footer_st.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/header_st.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/product_st.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/product_detail.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/signup_st.css')}}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index_slider_st.css')}}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main_prod.css')}}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/promo_video.css')}}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/sign_up_terms.css')}}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cart.css')}}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/checkout.css')}}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/my_page.css')}}"/>
+</head>
+<body>
+    <!-- 공통 Header -->
+    {% include 'header.html' %}
+
+    <!-- 페이지별 컨텐츠 -->
+    {% block content %}{% endblock %}
+
+    <!-- 공통 Footer -->
+    {% include 'footer.html' %}
+    <script src="{{ url_for('static', filename='js/login_popup.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/banner_slider.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/header.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/signup_sc.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/signup_sc_terms.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/promo_video.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/checkout.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/product.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/my_page.js') }}"></script>
+    <script src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+</body>
+</html>

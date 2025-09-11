@@ -1,0 +1,109 @@
+<header id="header">
+    <div class="container">
+        <div class="header-menu">
+            <div class="logo">
+                <a href="/"><img src="{{ url_for('static', filename='images/Uga_logo.png') }}"></a>
+            </div>
+
+            <!-- 햄버거 메뉴 -->
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <!-- 메뉴 -->
+            <ul class="menu">
+                <!-- Product 메뉴 -->
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropdown-toggle">Product</a>
+                    <ul class="dropdown-menu">
+                        <li class="category">
+                            <a href="javascript:void(0)">Category 1</a>
+                            <div class="dropdown-sub-menu">
+                                <a href="/product">sub menu</a>
+                                <a href="/product">sub menu2</a>
+                                <a href="/product">sub menu3</a>
+                            </div>
+                        </li>
+                        <li class="category">
+                            <a href="javascript:void(0)">Category 2</a>
+                            <div class="dropdown-sub-menu">
+                                <a href="/product">sub menu</a>
+                                <a href="/product">sub menu2</a>
+                            </div>
+                        </li>
+                        <li class="category">
+                            <a href="javascript:void(0)">Category 3</a>
+                            <div class="dropdown-sub-menu">
+                                <a href="/product">sub menu</a>
+                                <a href="/product">sub menu2</a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropdown-toggle">Company</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">DashBoard</a></li>
+
+                <!-- 로그인 상태 -->
+                {% if session.user_name %}
+                <li class="user-dropdown">
+                    <a href="javascript:void(0)" id="userMenuToggle">
+                        {{ session['user_name'] }}{% if session.get('user_title') %} ({{ session['user_title'] }}){% endif %}
+                    </a>
+                    <ul class="user-dropdown-menu" id="userDropdownMenu">
+                        <div class="aff_name">
+                            <p>소속 {% if session.get('user_aff') %}{{ session['user_aff'] }}{% endif %}</p>
+                            <p>성명 {{ session['user_name'] }}{% if session.get('user_title') %} 님 | 직함 {{ session['user_title'] }}{% endif %}</p>
+                        </div>
+                        <li><a href="{{ url_for('my_page') }}">마이페이지</a></li>
+                        <li><a href="{{ url_for('logout') }}">로그아웃</a></li>
+                    </ul>
+                </li>
+                {% else %}
+                <li><a class="login_btn" onclick="openLoginModal()">Login</a></li>
+                {% endif %}
+            </ul>
+
+            <div class="header-cart">
+                <button id="cartBtn">
+                    <span id="cart-icon">🛒</span>
+                    <span id="cart-count" class="cart-bubble">0</span>
+                </button>
+                <div id="cartDropdown" class="cart-dropdown" style="display:none;">
+                    <ul id="cart-items-list"></ul>
+                    <div class="cart-total">총합: <span id="cart-total">0</span>원</div>
+                    <button type="button" id="checkout-btn">구매하기</button>
+                </div>
+            </div>
+            <div id="moreMenu" class="more-menu" onclick="openMoreMenu()">...</div>
+        </div>
+    </div>
+
+    <!-- 로그인 팝업 -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeLoginModal()">&times;</span>
+            <h2>Login</h2>
+            <form id="loginForm"> <!-- id 추가, action 제거 -->
+                <input type="text" name="usermail" placeholder="이메일을 입력해주세요" required>
+                <input type="password" name="password" placeholder="비밀번호를 입력해주세요" required>
+                <button type="submit">Login</button>
+                <p id="loginError" style="color: red; display: none; margin-top: 8px;"></p>
+            </form>
+            <p>
+                <a href="/sign_up_terms" class="link-btn">Sign Up</a> | 
+                <a href="/reset_password" class="link-btn">Forgot Password?</a>
+            </p>
+        </div>
+    </div>
+</header>

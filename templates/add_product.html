@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="product-form-container">
+    <h2>Add New Product</h2>
+    <form action="{{ url_for('add_product') }}" method="POST" enctype="multipart/form-data">
+        <label for="name">Product Name</label>
+        <input type="text" name="name" id="name" required>
+
+        <label for="description">Description</label>
+        <textarea name="description" id="description" required></textarea>
+
+        <label for="price">Price </label>
+        <input type="number" step="1" name="price" id="price" required>
+
+        <label for="image">Product Image</label>
+        <input type="file" name="image" id="image" accept="image/*">
+        <div class="image-preview" id="imagePreview"></div>
+
+        <button type="submit">Add Product</button>
+    </form>
+</div>
+<script>
+const imageInput = document.getElementById('image');
+const imagePreview = document.getElementById('imagePreview');
+
+imageInput.addEventListener('change', () => {
+    const file = imageInput.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = e => {
+            imagePreview.innerHTML = `<img src="${e.target.result}" alt="Image Preview">`;
+        };
+        reader.readAsDataURL(file);
+    } else {
+        imagePreview.innerHTML = '';
+    }
+});
+</script>
+{% endblock %}

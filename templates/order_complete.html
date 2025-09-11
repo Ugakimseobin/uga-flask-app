@@ -1,0 +1,13 @@
+<h2>주문 완료 🎉</h2>
+<p>주문 번호: {{ order.id }}</p>
+<p>총 금액: {{ order.total_price }}원</p>
+<p>결제 수단: {{ order.payment_method }}</p>
+<p>배송지: {{ order.delivery_address }}</p>
+
+<h3>상품 내역</h3>
+<ul>
+{% for item in order.items %}
+  <li>{{ item.product.name }} - {{ item.quantity }}개 ({{ item.price }}원)</li>
+{% endfor %}
+</ul>
+<a href="/">메인으로 가기</a>

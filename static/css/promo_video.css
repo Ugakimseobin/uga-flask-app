@@ -1,0 +1,162 @@
+.promo-videos-section {
+    padding: 50px 0;
+    background: #fafafa;
+    display: flex;
+    justify-content: center;
+}
+
+/* VIDEO 제목 스타일 */
+.video-header {
+    position: relative;
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 20px;
+}
+
+.video-header h2 {
+    font-size: 2em;
+    font-weight: bold;
+    color: #222;
+    position: relative;
+    margin: 0;
+}
+
+.video-header h2 span {
+    background: #fafafa;
+    padding-right: 15px;
+    position: relative;
+    z-index: 2;
+}
+
+/* VIDEO 오른쪽 가로 라인 */
+.video-header::after {
+    content: "";
+    flex: 1;
+    height: 2px;
+    background: #ddd;
+    margin-left: 10px;
+}
+
+/* V 밑에서 시작하는 세로 라인 */
+.video-header h2::after {
+    content: "";
+    position: absolute;
+    left: 3px; /* 글꼴에 맞게 조정 */
+    bottom: -9em;
+    width: 2px;
+    height: 8.5em;
+    background: #ddd;
+}
+
+/* 영상 그리드 */
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 기본 4칸 */
+    gap: 20px;
+    padding: 2em;
+    background-color: #fafafa;
+    justify-items: center;
+}
+
+.video-card {
+    width: 100%;
+    max-width: 280px;
+    min-height: 200px;
+    text-align: center;
+}
+
+.video-card iframe,
+.video-card video {
+    width: 100%;
+    height: 160px;
+    border-radius: 10px;
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.video-card iframe:hover,
+.video-card video:hover {
+    transform: scale(1.05);
+}
+
+.video-card p {
+    margin-top: 10px;
+    font-size: 0.9em;
+    color: #555;
+}
+
+/* 빈칸용 placeholder */
+.video-card.placeholder {
+    background: transparent;
+    border: none;
+    pointer-events: none;
+}
+
+/* 반응형: 모바일 2칸, 태블릿 3칸, 데스크탑 4칸 */
+@media (max-width: 768px) {
+    .video-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .video-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1025px) {
+    .video-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (min-width: 1200px) {
+    #promo_video_section .container {
+        width: 1170px;
+    }
+}
+@media (min-width: 992px) {
+    #promo_video_section .container {
+        width: 970px;
+    }
+}
+@media (min-width: 768px) {
+    #promo_video_section .container {
+        width: 750px;
+    }
+}
+
+/* 모달 */
+.video-modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    justify-content: center;
+    align-items: center;
+}
+
+.video-modal iframe,
+.video-modal video {
+    width: 80%;
+    max-width: 900px;
+    border-radius: 12px;
+}
+
+.video-modal .close {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}

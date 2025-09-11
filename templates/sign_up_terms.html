@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}약관 동의{% endblock %}
+
+{% block content %}
+<div class="terms-page">
+    <div class="container">
+        <h2>회원가입 약관 동의</h2>
+        <form method="POST" id="termsForm">
+            
+            <!-- 전체 동의 -->
+            <label class="custom-check">
+                <input type="checkbox" id="agree_all">
+                <span class="checkmark"></span> 전체 동의
+            </label>
+
+            <h3>서비스 이용약관 (필수)</h3>
+            <div class="terms-box">
+                <p>
+                    본 서비스는 회원에게 다양한 기능을 제공합니다. 회원은 서비스를 정상적으로 이용하기 위해 
+                    회사의 정책을 준수해야 하며, 타인의 권리를 침해해서는 안됩니다.
+                </p>
+            </div>
+            <div class="terms-list">
+                <label class="custom-check">
+                    <input type="checkbox" class="agree_required" name="agree_terms">
+                    <span class="checkmark"></span> 서비스 이용약관 (필수)
+                </label>
+
+                <label class="custom-check">
+                    <input type="checkbox" class="agree_required" name="agree_privacy">
+                    <span class="checkmark"></span> 개인정보 수집 및 이용 (필수)
+                </label>
+
+                <label class="custom-check">
+                    <input type="checkbox" class="agree_optional" name="agree_marketing">
+                    <span class="checkmark"></span> 선택적 마케팅/광고 수신 동의 (선택)
+                </label>
+            </div>
+
+            <button type="submit" id="toSignupBtn">동의 후 회원가입</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,96 @@
+.terms-page {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background: #fff;
+    padding: 2em 0;
+}
+
+.terms-page h2 {
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+.terms-box {
+    max-height: 150px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 1em;
+    background: #f9f9f9;
+    margin-bottom: 1em;
+    border-radius: 6px;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.terms-page form label {
+    display: block;
+    margin-bottom: 1em;
+    font-size: 14px;
+}
+
+.terms-page button {
+    width: 100%;
+    padding: 14px;
+    background: #0077cc;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.terms-page button:hover {
+    background: #005fa3;
+}
+
+/* 체크박스 스타일 */
+.custom-check {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 14px;
+    margin-bottom: 1em;
+    user-select: none;
+}
+
+.custom-check input[type="checkbox"] {
+    display: none;
+}
+
+.custom-check .checkmark {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    background: #f5f5f5;
+    margin-right: 10px;
+    position: relative;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.custom-check input[type="checkbox"]:checked + .checkmark {
+    background-color: #a6d7ff;
+    border-color: #a6d7ff;
+}
+
+.custom-check .checkmark::after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.custom-check input[type="checkbox"]:checked + .checkmark::after {
+    display: block;
+}

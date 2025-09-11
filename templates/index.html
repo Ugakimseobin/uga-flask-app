@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %}Products{% endblock %}
+
+{% block content %}
+<main>
+    <!-- 배너 슬라이더 영역 -->
+    <div class="slider">
+        {% for banner in banners %}
+            <img src="{{ url_for('get_banner_image', image_id=banner.id) }}"
+                 alt="{{ banner.image_name }}"
+                 class="slide {% if loop.first %}active{% endif %}"
+                 data-index="{{ loop.index0 }}">
+        {% endfor %}
+
+        <div class="slider-indicators">
+            {% for banner in banners %}
+                <span class="dot {% if loop.first %}active{% endif %}" onclick="goToSlide({{ loop.index0 }})"></span>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- 메인 상품 -->
+    <div id="mainProductArea">
+        {% include "partials/main_products.html" %}
+    </div>
+
+    <script>
+    function loadProducts(page) {
+        fetch(`{{ url_for('products_page') }}?page=${page}`)
+            .then(response => {
+                if (!response.ok) throw new Error('Network response was not ok');
+                return response.text();
+            })
+            .then(html => {
+                document.getElementById("mainProductArea").innerHTML = html;
+            })
+            .catch(error => console.error("Error loading products:", error));
+    }
+    </script>
+
+    <!-- 광고 영상 섹션 -->
+    <div class="promo-videos-section">
+		<div class="video-container">
+			<div class="video-header">
+				<h2><span>VIDEO</span></h2>
+			</div>
+
+			<div class="video-grid">
+				{% for video in videos %}
+					<div class="video-card" onclick="openVideoModal({{ video.id }}, '{{ video.video_url }}')">
+						{% if video.video_url %}
+						<iframe src="https://www.youtube.com/embed/{{ video.video_url.split('v=')[-1] }}"
+								frameborder="0" allowfullscreen></iframe>
+						{% elif video.video_data %}
+						<video controls>
+							<source src="{{ url_for('get_promo_video', video_id=video.id) }}" type="video/mp4">
+						</video>
+						{% endif %}
+						<p>{{ video.description }}</p>
+					</div>
+				{% endfor %}
+
+				{# 4의 배수 맞추기 (부족한 칸 placeholder) #}
+				{% set remainder = videos|length % 4 %}
+				{% if remainder != 0 %}
+					{% for i in range(4 - remainder) %}
+						<div class="video-card placeholder"></div>
+					{% endfor %}
+				{% endif %}
+			</div>
+		</div>
+	</div>
+
+    <!-- 팝업 모달 -->
+    <div id="videoModal" class="video-modal">
+        <div id="modalContent">
+            <span class="close" onclick="closeVideoModal()">&times;</span>
+        </div>
+    </div>
+</main>
+
+{% if show_login == '1' %}
+<script>
+window.onload = function() {
+    openLoginModal();  // 로그인 모달 열기
+}
+</script>
+{% endif %}
+{% endblock %}

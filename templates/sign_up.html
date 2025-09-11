@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Products{% endblock %}
+
+{% block content %}
+    <div class="signup_main">
+        <div class="container">
+            <h2>회원가입</h2>
+            <form method="POST" id="signupForm" class="form-group">
+                <label for="email">이메일*</label>
+                <div class="email">
+                    <input type="text" id="email1" placeholder="아이디 입력" required>
+                    <span>@</span>
+                    <input type="text" id="email2" placeholder="도메인 입력" required>
+                    <select id="email_select">
+                        <option value="">이메일 선택</option>
+                        <option value="naver.com">naver.com</option>
+                        <option value="google.com">google.com</option>
+                        <option value="daum.net">daum.net</option>
+                    </select>
+                </div>
+                <!-- 실제 서버에 전달될 이메일 -->
+                <input type="hidden" id="email" name="email">
+
+                <label for="password">비밀번호*</label>
+                <input type="password" id="password" name="password" required>
+
+                <label for="confirm_password">비밀번호 확인*</label>
+                <input type="password" id="confirm_password" name="confirm_password" required>
+
+                <label for="name">이름*</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="title">직함</label>
+                <input type="text" id="title" name="title">
+
+                <label for="affiliation">소속</label>
+                <input type="text" id="affiliation" name="affiliation">
+
+                <!-- 주소 입력 -->
+                <label for="address">주소</label>
+                <div class="address-field">
+                    <input type="text" id="postcode" placeholder="우편번호" readonly>
+                    <button type="button" id="findAddress">주소찾기</button>
+                </div>
+                <input type="text" id="address" name="base_address" placeholder="기본 주소" readonly required>
+                <input type="text" id="address_detail" name="detail_address" placeholder="상세 주소 입력">
+
+                <label for="phone">연락처</label>
+                <input type="text" id="phone" name="phone">
+
+                <button type="submit">회원가입</button>
+            </form>
+        </div>
+    </div>
+    {% endblock %}

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+<main class="product-detail-page">
+    <button class="back-btn" onclick="history.back()">←</button>
+
+    <div class="image-container">
+        <img src="{{ url_for('get_product_image', product_id=product.id) }}" alt="{{ product.name }}">
+    </div>
+
+    <div class="info-container">
+        <h2>{{ product.name }}</h2>
+        <p class="description">{{ product.description }}</p>
+        <p class="price">{{ product.price }}원</p>
+
+        {% if user_aff == '유가' %}
+        <div class="admin-actions">
+            <a href="{{ url_for('edit_product', product_id=product.id) }}" class="btn btn-edit">상품 수정</a>
+            <form action="{{ url_for('delete_product', product_id=product.id) }}" method="POST" style="display:inline;">
+                <button type="submit" class="btn btn-delete" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</button>
+            </form>
+        </div>
+        {% else %}
+        <div class="qty-cart-wrapper">
+            <input type="number" min="1" value="1" id="detail-qty">
+            <button id="add-detail-cart" data-id="{{ product.id }}">🛒 카트 담기</button>
+        </div>
+        {% endif %}
+    </div>
+</main>
+{% endblock %}
+

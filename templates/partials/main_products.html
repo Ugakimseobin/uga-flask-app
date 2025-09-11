@@ -1,0 +1,48 @@
+<div class="main_product">
+    <div class="container">
+        {% for product in products %}
+        <div class="main-product-card">
+            <div class="main-product-image">
+                <img src="{{ url_for('get_product_image', product_id=product.id) }}" alt="{{ product.name }}">
+            </div>
+            <div class="main-product-info">
+                <h2>{{ product.name }}</h2>
+
+                <div class="description-wrapper">
+                    <p class="description">{{ product.description }}</p>
+                </div>
+
+                {% if session.user_name %}
+                    <div class="description-footer">
+                        <span class="ellipsis">...</span>
+                        <a href="{{ url_for('product_detail', product_id=product.id) }}" class="detail-btn">자세히 보기</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- 페이지네이션 -->
+    <div class="pagination">
+        {% if pagination.has_prev %}
+            <a href="javascript:void(0)" onclick="loadProducts({{ pagination.prev_num }})">&laquo;</a>
+        {% endif %}
+
+        {% for p in pagination.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+            {% if p %}
+                {% if p == pagination.page %}
+                    <span class="active">{{ p }}</span>
+                {% else %}
+                    <a href="javascript:void(0)" onclick="loadProducts({{ p }})">{{ p }}</a>
+                {% endif %}
+            {% else %}
+                <span class="ellipsis">…</span>
+            {% endif %}
+        {% endfor %}
+
+        {% if pagination.has_next %}
+            <a href="javascript:void(0)" onclick="loadProducts({{ pagination.next_num }})">&raquo;</a>
+        {% endif %}
+    </div>
+</div>

@@ -1,0 +1,74 @@
+/* 슬라이더 스타일 */
+.slider {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    margin: 0 auto;
+    background-color: #fafafa;
+}
+
+/* 슬라이드 */
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    object-fit: cover;       /* 이미지 비율 유지하며 채움 */
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.slide.active {
+    opacity: 1;
+    z-index: 1;
+}
+
+/* 슬라이더 컨테이너 높이 자동 계산 */
+.slider::before {
+    content: "";
+    display: block;
+    padding-top: 40%;       /* 기본 세로 비율: 5:2 */
+}
+
+/* 슬라이더 인디케이터 (작은 동그라미 버튼) */
+.slider-indicators {
+    position: absolute;
+    bottom: 10px; /* 배너 아래쪽에서 10px 위로 */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 5px;
+    z-index: 10;
+}
+
+.slider-indicators .dot {
+    height: 12px;
+    width: 12px;
+    margin: 0 5px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.slider-indicators .dot.active {
+    background-color: #0077cc;
+}
+
+/* 슬라이더 반응형 */
+/*@media (max-width: 992px) {
+    .slider::before {
+        padding-top: 50%;  /* 태블릿에서 세로 비율 조금 증가 */
+/*    }
+}*/
+
+@media (max-width: 576px) {
+/*    .slider::before {
+        padding-top: 70%;  /* 모바일에서 세로 더 크게 */
+/*    }*/
+    .slider img {
+        object-fit: contain; /* 작은 화면에서 이미지 잘리지 않게 */
+    }
+}
