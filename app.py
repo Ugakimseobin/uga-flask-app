@@ -4,6 +4,8 @@ from io import BytesIO
 from werkzeug.security import generate_password_hash, check_password_hash
 import json
 import base64
+from config import Config
+import os
 #from pyngrok import ngrok
 
 app = Flask(__name__)
