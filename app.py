@@ -716,7 +716,7 @@ def reset_password_route():
     flash('Password reset successful! You can now log in.', 'success')
     return redirect(url_for('home'))
 
-
+port = int(os.environ.get("PORT", 5000))  # Render가 준 포트 쓰고, 없으면 5000
 # -----------------------------
 # Flask 실행
 # -----------------------------
@@ -724,7 +724,7 @@ if __name__ == "__main__":
     try:
        # public_url = ngrok.connect(5000)
         print("앱 실행 시도", flush=True)
-        app.run(host='0.0.0.0',debug=True, port=5000)
+        app.run(host='0.0.0.0',debug=True, port=port)
     except Exception as e:
         print(f"Flask run error: {e}", flush=True)
         input("Press Enter to exit")
