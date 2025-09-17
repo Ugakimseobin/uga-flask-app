@@ -1,60 +1,30 @@
 {% extends "base.html" %}
-
-{% block title %}Products{% endblock %}
-
 {% block content %}
-<main class="product-page">
-    <h1>Products</h1>
+<div class="product-page">
 
-    <div class="product-grid">
-        {% for product in products %}
-        <div class="product-card" data-detail-url="{{ url_for('product_detail', product_id=product.id) }}">
-            <img src="{{ url_for('get_product_image', product_id=product.id) }}" alt="{{ product.name }}">
-            <h3>{{ product.name }}</h3>
-            <p class="price">{{ product.price }}원</p>
+    <!-- 좌측 카테고리 & 서브카테고리 -->
+    <div class="category-panel">
+        <!-- 대분류 카테고리 -->
+        <ul class="category-list">
+            {% for category in categories %}
+            <li class="category-item" data-category="{{ category.id }}">
+                {{ category.name }}
+            </li>
+            {% endfor %}
+        </ul>
 
-            <!-- 수량 선택 -->
-            <div class="qty-wrapper">
-                <button class="qty-btn minus">-</button>
-                <input type="number" min="1" value="1" class="product-qty" data-id="{{ product.id }}">
-                <button class="qty-btn plus">+</button>
-            </div>
+        <!-- 서브카테고리: 선택한 카테고리만 보여줌 -->
+        <ul class="sub-category-list" style="display:none;">
+            <!-- JS에서 클릭 시 렌더링 -->
+        </ul>
+    </div>
 
-            <!-- 카트 담기 버튼 -->
-            <button class="add-to-cart" data-id="{{ product.id }}">🛒 카트 담기</button>
+    <!-- 우측 제품 영역: 선택된 서브카테고리 있을 때만 보여줌 -->
+    <div class="product-right" style="display:none;">
+        <h3 id="selected-sub-category"></h3>
+        <div class="product-list">
+            <!-- JS에서 클릭된 서브카테고리 제품 렌더링 -->
         </div>
-        {% endfor %}
     </div>
-
-    {% if user_aff == '유가' %}
-    <div class="product-add">
-        <a href="{{ url_for('add_product') }}" class="add-product-btn">상품 추가</a>
-    </div>
-    {% endif %}
-
-    <!-- 페이지네이션 -->
-    <div class="pagination">
-        {% if pagination.has_prev %}
-            <a href="{{ url_for('product_page', page=pagination.prev_num) }}">&laquo; 이전</a>
-        {% endif %}
-        <span>페이지 {{ pagination.page }} / {{ pagination.pages }}</span>
-        {% if pagination.has_next %}
-            <a href="{{ url_for('product_page', page=pagination.next_num) }}">다음 &raquo;</a>
-        {% endif %}
-    </div>
-</main>
-{% endblock %}
-
-{% block scripts %}
-<script src="{{ url_for('static', filename='product.js') }}"></script>
-<script>
-// 카드 클릭 시 상세페이지 이동
-document.querySelectorAll('.product-card').forEach(card => {
-    card.addEventListener('click', e => {
-        if(!e.target.classList.contains('qty-btn') && !e.target.classList.contains('add-to-cart') && !e.target.classList.contains('product-qty')){
-            window.location.href = card.dataset.detailUrl;
-        }
-    });
-});
-</script>
+</div>
 {% endblock %}

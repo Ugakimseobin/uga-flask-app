@@ -3,6 +3,7 @@
     padding: 2em;
     max-width: 1200px;
     margin: 0 auto;
+    display: flex;
 }
 
 .product-page h1 {
@@ -12,6 +13,35 @@
     color: #494949;
 }
 
+.category-panel {
+    width: 220px;
+    margin-right: 20px;
+}
+
+.category-list, .sub-category-list {
+    list-style: none;
+    padding: 0;
+}
+
+.category-item, .sub-category-item {
+    padding: 10px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
+
+.category-item:hover, .sub-category-item:hover {
+    background-color: #f2f2f2;
+}
+
+.product-right {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
 .product-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr); /* 가로 5개 */
@@ -19,12 +49,19 @@
     margin-top: 20px;
 }
 
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
 .product-card {
     background-color: #fff;
     border: 1px solid #ddd;
-    padding: 15px;
-    border-radius: 8px;
     text-align: center;
+    width: 180px;
+    padding: 10px;
+    border-radius: 5px;
 }
 
 .qty-wrapper {

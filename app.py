@@ -90,7 +90,22 @@ class Product(db.Model):
     price = db.Column(db.Integer, nullable=False)
     image_data = db.Column(db.LargeBinary) 
     created_at = db.Column(db.DateTime, server_default=db.func.current_timestamp())
+    category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
+    sub_category_id = db.Column(db.Integer, db.ForeignKey('sub_category.id'))
     main_prod = db.Column(db.String(255))
+
+class Category(db.Model):
+    __tablename__ = 'category'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    sub_categories = db.relationship('SubCategory', backref='category', cascade='all, delete-orphan')
+
+class SubCategory(db.Model):
+    __tablename__ = 'sub_category'
+    id = db.Column(db.Integer, primary_key=True)
+    category_id = db.Column(db.Integer, db.ForeignKey('category.id', ondelete='CASCADE'), nullable=False)
+    name = db.Column(db.String(100), nullable=False)
+    products = db.relationship('Product', backref='sub_category', cascade='all, delete-orphan')
 
 class CartItem(db.Model):
     __tablename__ = 'cart_items'
@@ -574,6 +589,28 @@ def logout():
     flash("로그아웃되었습니다.", "success")
     return redirect(url_for('home'))
 
+# 상품 카테고리
+@app.route('/get_categories')
+def get_categories():
+    categories = Category.query.all()
+    data = []
+    for cat in categories:
+        data.append({'id': cat.id, 'name': cat.name})
+    return jsonify(data)
+
+@app.route('/get_subcategories/<int:category_id>')
+def get_subcategories(category_id):
+    sub_cats = SubCategory.query.filter_by(category_id=category_id).all()
+    data = [{'id': sc.id, 'name': sc.name} for sc in sub_cats]
+    return jsonify(data)
+
+@app.route('/get_products/<int:sub_category_id>')
+def get_products(sub_category_id):
+    products = Product.query.filter_by(sub_category_id=sub_category_id).all()
+    data = [{'id': p.id, 'name': p.name, 'price': float(p.price)} for p in products]
+    return jsonify(data)
+
+# 상품 페이지
 @app.route('/product')
 def product_page():
     if 'user_id' not in session:
