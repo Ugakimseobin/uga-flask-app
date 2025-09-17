@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="company-section">
+  <h1>함께하는 사람들</h1>
+  <div class="team-container">
+    <div class="team-member">
+      <img src="{{ url_for('static', filename='images/member1.jpg') }}" alt="멤버1">
+      <h3>김수빈</h3>
+      <p>CEO</p>
+    </div>
+    <div class="team-member">
+      <img src="{{ url_for('static', filename='images/member2.jpg') }}" alt="멤버2">
+      <h3>홍길동</h3>
+      <p>CTO</p>
+    </div>
+    <div class="team-member">
+      <img src="{{ url_for('static', filename='images/member3.jpg') }}" alt="멤버3">
+      <h3>이영희</h3>
+      <p>디자이너</p>
+    </div>
+    <!-- 필요하면 멤버 더 추가 -->
+  </div>
+</section>
+{% endblock %}

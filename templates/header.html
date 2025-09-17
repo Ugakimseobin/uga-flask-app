@@ -1,4 +1,4 @@
-<header id="header">
+<header id="header" class="main-header">
     <div class="header-container">
         <div class="header-menu">
             <div class="logo">
@@ -16,26 +16,43 @@
             <ul class="menu">
                 <!-- Product 메뉴 -->
                  <li class="dropdown">
-                    <a href="javascript:void(0)" class="dropdown-toggle">회사소개</a>
-                    <ul class="dropdown-menu" id="company-drop" style="flex-direction: row;">
-                        <li><a href="#">함께하는 사람들</a></li>
+                    <a href="javascript:void(0)" class="dropdown-toggle">회사소개<span class="arrow">∨</span></a>
+                    <ul class="dropdown-menu" id="company-drop" style="display: flex; flex-direction: row;">
+                        <li><a href="{{ url_for('company') }}">함께하는 사람들</a></li>
                         <li><a href="#">우리 이야기</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="javascript:void(0)" class="dropdown-toggle">상품</a>
-                    <ul class="dropdown-menu" id="product-drop">
-                        <li class="category"><a href="javascript:void(0)">카테고리1</a>
-                            <ul class="dropdown-sub-menu">
-                                <li><a href="javascript:void(0)">항목1-1</a></li>
-                                <li><a href="javascript:void(0)">항목1-2</a></li>
-                            </ul>
+                    <a href="javascript:void(0)" class="dropdown-toggle">상품<span class="arrow">∨</span></a>
+                    <ul class="dropdown-menu">
+                        <li class="category">
+                            <a href="javascript:void(0)">카테고리1</a>
+                            <div class="dropdown-sub-menu">
+                                <a href="/product">항목</a>
+                                <a href="/product">항목</a>
+                                <a href="/product">항목</a>
+                            </div>
                         </li>
-                        <li class="category"><a href="javascript:void(0)">카테고리2</a>
-                            <ul class="dropdown-sub-menu">
-                                <li><a href="javascript:void(0)">항목2-1</a></li>
-                                <li><a href="javascript:void(0)">항목2-2</a></li>
-                            </ul>
+                        <li class="category">
+                            <a href="javascript:void(0)">카테고리2</a>
+                            <div class="dropdown-sub-menu">
+                                <a href="/product">항목</a>
+                                <a href="/product">항목</a>
+                            </div>
+                        </li>
+                        <li class="category">
+                            <a href="javascript:void(0)">카테고리3</a>
+                            <div class="dropdown-sub-menu">
+                                <a href="/product">항목</a>
+                                <a href="/product">항목</a>
+                            </div>
+                        </li>
+                        <li class="category">
+                            <a href="javascript:void(0)">카테고리4</a>
+                            <div class="dropdown-sub-menu">
+                                <a href="/product">항목</a>
+                                <a href="/product">항목</a>
+                            </div>
                         </li>
                     </ul>
                 </li>
@@ -49,7 +66,8 @@
                 {% if session.get('user_name') %}
                 <li class="user-dropdown">
                     <a href="javascript:void(0)" id="userMenuToggle">
-                        {{ session['user_name'] }} ▼
+                        <img src="{{ url_for('static', filename='images/user_logo2.png') }}">
+                        <p>{{ session['user_name'] }}</p>
                     </a>
                     <ul class="user-dropdown-menu" id="userDropdownMenu">
                         <div class="aff_name">
@@ -92,8 +110,8 @@
                 <p id="loginError" style="color: red; display: none; margin-top: 8px;"></p>
             </form>
             <p>
-                <a href="/sign_up_terms" class="link-btn">회원가입</a> | 
-                <a href="/reset_password" class="link-btn">비밀번호 찾기</a>
+                <a href="/sign_up_terms" class="link-btn">Sign Up</a> | 
+                <a href="/reset_password" class="link-btn">Forgot Password?</a>
             </p>
         </div>
     </div>
@@ -112,13 +130,3 @@
         {% endfor %}
     </ul>
 </nav>
-
-<!-- 상품/카테고리/제품 영역 -->
-<div class="product-panel">
-    <div id="product-left">
-        <!-- 카테고리, 서브카테고리 동적 로드 -->
-    </div>
-    <div id="product-right" style="display:none;">
-        <!-- 선택된 서브카테고리 상품 리스트 -->
-    </div>
-</div>

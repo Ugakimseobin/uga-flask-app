@@ -10,6 +10,7 @@ body {
     background-color: #ffffff;
     color: #000;
     font-family: 'Noto Sans KR', sans-serif;
+    text-decoration: none;
 }
 
 @media (min-width: 1200px) {
