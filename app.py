@@ -93,6 +93,8 @@ class Product(db.Model):
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
     sub_category_id = db.Column(db.Integer, db.ForeignKey('sub_category.id'))
     main_prod = db.Column(db.String(255))
+    category = db.relationship('Category')
+    subcategory = db.relationship('SubCategory')
 
 class Category(db.Model):
     __tablename__ = 'category'
@@ -224,8 +226,7 @@ def prettify_segment(seg):
     if seg.isdigit():
         return seg
     # 하이픈/언더바를 공백으로 변경
-    return SEGMENT_NAME_MAP.get(seg, seg.replace('-', ' ').replace('_', ' ').title())
-
+    return SEGMENT_NAME_MAP.get(seg, seg.replace('-', ' ').replace('_', ' ').title())  # 🔥 수정됨
 
 def generate_breadcrumb(extra=None):
     """
@@ -642,6 +643,33 @@ def product_page():
         user_id=user_id,
         user_aff=user_aff
     )
+
+@app.route('/products/category/<int:category_id>')
+def products_category(category_id):
+    category = Category.query.get_or_404(category_id)
+    products = Product.query.filter_by(category_id=category.id).all()
+    
+    breadcrumb = [
+        ("홈", url_for('index')),
+        (category.name, None)
+    ]
+    
+    return render_template('products.html', products=products, breadcrumb=breadcrumb)
+
+# 서브카테고리별 상품 목록
+@app.route('/products/category/<int:category_id>/subcategory/<int:sub_category_id>')
+def products_subcategory(category_id, sub_category_id):
+    category = Category.query.get_or_404(category_id)
+    subcategory = SubCategory.query.get_or_404(sub_category_id)
+    products = Product.query.filter_by(category_id=category.id, sub_category_id=subcategory.id).all()
+    
+    breadcrumb = [
+        ("홈", url_for('index')),
+        (category.name, url_for('products_category', category_id=category.id)),
+        (subcategory.name, None)
+    ]
+    
+    return render_template('products.html', products=products, breadcrumb=breadcrumb)
 
 @app.route('/products/<category>')
 def product_category(category):
