@@ -635,6 +635,22 @@ def get_product_image(product_id):
         return send_file(BytesIO(product.image_data), mimetype='image/jpeg')
     return send_file(os.path.join('static', 'images', 'default.png'), mimetype='image/png')
 
+#@app.route('/products/<category>/<subcategory>/<product_id>')
+#def product_detail(category, subcategory, product_id):
+    # 상품 정보 가져오기
+#    product = Product.query.get(product_id)
+    
+    # 브레드크럼 리스트 생성
+#    breadcrumb = [
+#        ("홈", url_for('index')),
+#        ("상품 목록", url_for('products')),
+#        (category, url_for('products_category', category=category)),
+#        (subcategory, url_for('products_subcategory', category=category, subcategory=subcategory)),
+#        (product.name, url_for('product_detail', category=category, subcategory=subcategory, product_id=product.id))]
+    
+    
+#    return render_template('product_detail.html', product=product, breadcrumb=breadcrumb)
+
 @app.route('/product/<int:product_id>')
 def product_detail(product_id):
     product = Product.query.get_or_404(product_id)

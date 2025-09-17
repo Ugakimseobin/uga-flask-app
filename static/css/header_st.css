@@ -423,30 +423,7 @@ main {
     }
 }
 
-/* ==============================
-   브레드크럼 헤더
-============================== */
-.breadcrumb-container {
-    height: 44px;
-    border-bottom: #a6d7ff solid 1px;
-    list-style: none;
-    width: 100%;    
-    display: flex;
-    align-items: center;
-    padding: 0 10%;
-}
 
-.breadcrumb-container .breadcrumb {
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-}
-
-.breadcrumb-container .breadcrumb li{
-    margin: 0 2em;
-    align-items: center;
-    list-style: none;
-}
 
 /* ==============================
    반응형
