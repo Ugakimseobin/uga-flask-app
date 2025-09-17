@@ -25,15 +25,48 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 카테고리 클릭 → 서브메뉴
-    document.querySelectorAll('.menu li .dropdown-menu .category > a').forEach(cat => {
-        cat.addEventListener('click', e => {
-            if(window.innerWidth <= 992){
+    // =====================
+    // 드롭다운 (데스크탑 클릭)
+    // =====================
+    document.querySelectorAll('.dropdown > .dropdown-toggle').forEach(toggle => {
+        toggle.addEventListener('click', (e) => {
+            if (window.innerWidth > 992) {
                 e.preventDefault();
-                const category = cat.parentElement;
-                category.classList.toggle('active');
+                const parent = toggle.parentElement;
+
+                // 다른 드롭다운 닫기
+                document.querySelectorAll('.dropdown').forEach(d => {
+                    if (d !== parent) d.classList.remove('open');
+                });
+
+                // 현재 메뉴 토글
+                parent.classList.toggle('open');
             }
         });
+    });
+
+    // 카테고리(2단계) 클릭
+    document.querySelectorAll('.dropdown-menu .category > a').forEach(catToggle => {
+        catToggle.addEventListener('click', (e) => {
+            if (window.innerWidth > 992) {
+                e.preventDefault();
+                const parent = catToggle.parentElement;
+
+                // 다른 카테고리 닫기
+                document.querySelectorAll('.dropdown-menu .category').forEach(c => {
+                    if (c !== parent) c.classList.remove('open');
+                });
+
+                parent.classList.toggle('open');
+            }
+        });
+    });
+
+    // 외부 클릭 시 닫기
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.dropdown')) {
+            document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('open'));
+        }
     });
 
     // 윈도우 리사이즈 시 초기화
@@ -207,22 +240,24 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 체크아웃
-    document.getElementById('checkout-btn')?.addEventListener('click', async (e)=>{
+    document.getElementById('checkout-btn')?.addEventListener('click', (e) => {
         e.preventDefault();
-        const response = await fetch('/cart_items');
-        const items = await response.json();
-        if(items.length===0){ alert('카트에 상품이 없습니다.'); return; }
-        const res = await fetch('/checkout',{
-            method:'POST',
-            headers:{'Content-Type':'application/json'},
-            body: JSON.stringify({items})
-        });
-        const data = await res.json();
-        if(res.ok && data.success){
-            window.location.href = `/checkout_page?total=${data.total}`;
-        } else {
-            alert(data.message || '주문 처리 중 오류가 발생했습니다.');
-        }
+
+        // 서버에서 장바구니 가져오기
+        fetch('/cart_items')
+            .then(res => res.json())
+            .then(items => {
+                if (items.length === 0) {
+                    alert('카트에 상품이 없습니다.');
+                    return;
+                }
+                // ✅ 단순히 checkout 페이지로 이동
+                window.location.href = '/checkout_page';
+            })
+            .catch(err => {
+                console.error(err);
+                alert('서버와 통신 중 오류가 발생했습니다.');
+            });
     });
 
     // 초기 카트 갱신

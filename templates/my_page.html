@@ -11,6 +11,9 @@
             <li><a href="javascript:void(0)" class="menu-item" data-tab="orders">주문내역</a></li>
             <li><a href="javascript:void(0)" class="menu-item" data-tab="cart">장바구니</a></li>
             <li><a href="javascript:void(0)" class="menu-item" data-tab="change_password">비밀번호 변경</a></li>
+            {% if session.get('user_aff', '') == '유가' %}
+                <li><a href="javascript:void(0)" class="menu-item" data-tab="admin">관리자 기능</a></li>
+            {% endif %}
         </ul>
     </nav>
 
@@ -40,25 +43,15 @@
         <!-- 주문내역 -->
         <div id="orders" class="tab-content">
             <h3>주문내역</h3>
-            {% if orders %}
-            <ul class="order-list">
-                {% for order in orders %}
-                <li>
-                    <strong>주문번호:</strong> {{ order.id }} |
-                    <strong>총 금액:</strong> {{ order.total_price }}원 |
-                    <strong>날짜:</strong> {{ order.created_at.strftime('%Y-%m-%d') }}
-                    <ul>
-                        {% for item in order.items %}
-                        <li>{{ item.product.name }} × {{ item.quantity }}개 ({{ item.price }}원)</li>
-                        {% endfor %}
-                    </ul>
-                </li>
-                {% endfor %}
+            <ul class="order-list" id="order-list">
+                <!-- ✅ 주문내역은 my_page.js에서 Ajax로 로드됨 -->
             </ul>
-            {% else %}
-            <p>주문내역이 없습니다.</p>
-            {% endif %}
+            <div id="pagination" class="pagination">
+                <!-- ✅ 페이지네이션 버튼도 JS에서만 생성 -->
+            </div>
         </div>
+
+
 
         <!-- 장바구니 -->
         <div id="cart" class="tab-content">
@@ -80,6 +73,40 @@
             </form>
         </div>
 
+        {% if session.get('user_aff', '') == '유가' %}
+        <div id="admin" class="tab-content">
+            <h3>관리자 기능</h3>
+
+            <!-- 배너 이미지 추가 -->
+            <form id="banner-upload-form" method="POST" enctype="multipart/form-data">
+                <h4>배너 이미지 추가</h4>
+                <label>이미지 이름:</label>
+                <input type="text" name="image_name" placeholder="배너 이름" required><br>
+                <label>이미지 선택:</label>
+                <input type="file" name="banner_image" accept="image/*" required><br>
+                <button type="submit">업로드</button>
+            </form>
+            <div id="banner-upload-msg"></div>
+            <hr>
+
+            <!-- 프로모션 영상 추가 -->
+            <form id="video-upload-form" method="POST" enctype="multipart/form-data">
+                <h4>프로모션 영상 추가</h4>
+                <label>영상 설명:</label>
+                <input type="text" name="description" placeholder="영상 설명" required><br>
+                <label>영상 파일:</label>
+                <input type="file" name="video_file" accept="video/*"><br>
+                <label>유튜브 URL (선택):</label>
+                <input type="url" name="video_url" placeholder="https://www.youtube.com/watch?v=..."><br>
+                <label>영상 이름:</label>
+                <input type="text" name="video_name" placeholder="영상 이름 (선택)"><br>
+                <button type="submit">업로드</button>
+            </form>
+            <div id="video-upload-msg"></div>
+        </div>
+        {% endif %}
+
     </div>
 </main>
+
 {% endblock %}

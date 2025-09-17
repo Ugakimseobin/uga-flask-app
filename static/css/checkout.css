@@ -3,6 +3,18 @@
     justify-content: center;
     padding: 2em 0;
     background: #f7f7f7;
+    width: 100%;
+}
+
+@media (min-width: 1200px) {
+    .checkout-page .checkout-container {
+        width: 1170px;
+    }
+}
+@media (min-width: 992px) {
+    .checkout-page .checkout-container {
+        width: 970px;
+    }
 }
 
 .checkout-wrapper {

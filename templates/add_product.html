@@ -1,22 +1,22 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="product-form-container">
-    <h2>Add New Product</h2>
+    <h2>상품 추가</h2>
     <form action="{{ url_for('add_product') }}" method="POST" enctype="multipart/form-data">
-        <label for="name">Product Name</label>
+        <label for="name">상품 이름</label>
         <input type="text" name="name" id="name" required>
 
-        <label for="description">Description</label>
+        <label for="description">상품 설명</label>
         <textarea name="description" id="description" required></textarea>
 
-        <label for="price">Price </label>
+        <label for="price">가격 </label>
         <input type="number" step="1" name="price" id="price" required>
 
-        <label for="image">Product Image</label>
+        <label for="image">상품 이미지</label>
         <input type="file" name="image" id="image" accept="image/*">
         <div class="image-preview" id="imagePreview"></div>
 
-        <button type="submit">Add Product</button>
+        <button type="submit">추가하기</button>
     </form>
 </div>
 <script>

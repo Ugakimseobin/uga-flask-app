@@ -1,13 +1,37 @@
-<h2>주문 완료 🎉</h2>
-<p>주문 번호: {{ order.id }}</p>
-<p>총 금액: {{ order.total_price }}원</p>
-<p>결제 수단: {{ order.payment_method }}</p>
-<p>배송지: {{ order.delivery_address }}</p>
+{% extends "base.html" %}
+{% block title %}주문 완료{% endblock %}
 
-<h3>상품 내역</h3>
-<ul>
-{% for item in order.items %}
-  <li>{{ item.product.name }} - {{ item.quantity }}개 ({{ item.price }}원)</li>
-{% endfor %}
-</ul>
-<a href="/">메인으로 가기</a>
+{% block content %}
+<main class="order-complete">
+    <div class="order-container">
+        <div class="order-card">
+            <h2>🎉 주문 완료되었습니다!</h2>
+            <div class="order-info">
+                <p><strong>총 금액:</strong> {{ order.total_price }}원</p>
+                <p><strong>배송지:</strong> {{ order.delivery_address }}</p>
+            </div>
+
+            <h3>상품 내역</h3>
+            <ul class="order-items">
+                {% for item in order.items %}
+                <li>
+                    <span class="item-name">{{ item.product.name }}</span>
+                    <span class="item-qty">{{ item.quantity }}개</span>
+                    <span class="item-price">({{ item.unit_price }}원)</span>
+                </li>
+                {% endfor %}
+            </ul>
+
+            <a href="/" class="btn-home">메인으로 가기</a>
+        </div>
+    </div>
+</main>
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/order_complete.css') }}">
+{% endblock %}
+
+{% block js %}
+<script src="{{ url_for('static', filename='js/order_complete.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,73 @@
+/* order_complete.css */
+.order-complete {
+    width: 100%;
+    padding: 50px 20px;
+    background-color: #f9f9f9;
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+
+}
+
+@media (min-width: 1200px) {
+    .order-container {
+        width: 1170px;
+    }
+}
+@media (min-width: 992px) {
+    .order-container {
+        width: 970px;
+    }
+}
+.order-card {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.order-card h2 {
+    color: #27ae60;
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+.order-info p {
+    font-size: 16px;
+    margin: 5px 0;
+    color: #333;
+}
+
+.order-items {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    text-align: left;
+}
+
+.order-items li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+    border-bottom: 1px solid #eee;
+    font-size: 15px;
+}
+
+.btn-home {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 25px;
+    background-color: #27ae60;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.btn-home:hover {
+    background-color: #219150;
+}

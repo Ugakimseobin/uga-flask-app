@@ -5,16 +5,13 @@
     position: relative;
     width: 100%;
     font-size: 1.1em;
-    border-bottom: 4px solid #a6d7ff;
+    border-bottom: 1px solid #a6d7ff;
     background-color: #fff;
 }
 
 #header .container {
     position: relative;
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-left: auto;
-    margin-right: auto;
+    padding: 0 10px;
     height: 100px;
 }
 
@@ -24,11 +21,13 @@
     flex-direction: row;
     align-items: center;
     height: 100px;
+    padding: 0 30px;
 }
 
 #header .logo {
     align-items: center;
     vertical-align: middle;
+    margin-right: auto;
 }
 
 #header .logo img {
@@ -39,20 +38,20 @@
    메뉴 스타일
 ============================== */
 #header .menu {
+    flex: 1;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     flex-direction: row;
     align-items: center;
-    list-style: none;
-    vertical-align: middle;
-    margin-left: auto;
-    padding: 2em;
+    gap: 2em;
+    margin: 0;
+    padding: 0;
 }
 
 #header .menu li {
     position: relative;
     margin-left: 2em;
-    padding-left: 0;
+    list-style: none;
 }
 
 #header .menu li a,
@@ -66,6 +65,43 @@
 #header .menu li a:hover,
 #header .menu li .login_btn:hover {
     color: #005fa3;
+}
+
+/* ==============================
+   오른쪽 영역 (로그인+카트)
+============================== */
+#header .right-section {
+    display: flex;
+    align-items: center;
+    gap: 1.5em;
+    margin-left: auto;
+    list-style: none;
+}
+
+.header-cart {
+    position: relative;
+}
+
+.cart-bubble {
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  background: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
+}
+.cart-dropdown {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background: white;
+  border: 1px solid #ddd;
+  padding: 10px;
+  width: 200px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  z-index: 1000;
 }
 
 /* ==============================
@@ -86,11 +122,13 @@
     padding: 20px 30px;           /* 메뉴 크기 크게 */
     list-style: none;
 
-    display: grid;                 /* Grid 사용 */
-    grid-template-columns: repeat(5, 1fr); /* 한 줄 최대 5개 */
+    display: flex;
+    flex-direction: column;
+/*    display: grid;                 /* Grid 사용 */
+/*    grid-template-columns: repeat(5, 1fr); /* 한 줄 최대 5개 */
     gap: 1.5em;                    /* 항목 간격 */
     
-    min-width: 800px;              /* 드랍메뉴 전체 최소 너비 */
+/*    min-width: 800px;*/              /* 드랍메뉴 전체 최소 너비 */
     min-height: 100px;             /* 최소 높이 */
     
     white-space: normal;
@@ -102,16 +140,26 @@
     transition: opacity 0.3s;
 }
 
-/* hover 시 드롭다운 보이기 */
-#header .menu li.dropdown:hover > .dropdown-menu {
+/* hover 삭제 → open 클래스에서 표시 */
+#header .menu li.dropdown.open > .dropdown-menu {
     visibility: visible;
     opacity: 1;
+}
+
+/* 2차 서브메뉴 */
+#header .menu li .dropdown-menu li .dropdown-sub-menu {
+    display: none;
+}
+
+#header .menu li .dropdown-menu li.category.open > .dropdown-sub-menu {
+    display: block;
 }
 
 /* 드롭다운 항목 */
 #header .menu li .dropdown-menu li {
     list-style: none;
     min-width: 150px;              /* 항목 최소 너비 */
+    margin: 0;
 }
 
 /* 드롭다운 항목 링크 */
@@ -138,14 +186,18 @@
     margin-top: 0.1em;
 }
 
+#header .menu li #company-drop li a{
+    padding: 12px 0px;
+}
+
 /* ==============================
-   로그인 시 스타일
+   로그인 시 드랍다운
 ============================== */
-#header .menu .user-dropdown {
+#header .user-dropdown {
     position: relative;
 }
 
-#header .menu .user-dropdown > a {
+#header .user-dropdown > a {
     background-color: #494949;
     color: #fff;
     padding: 0.6em 1.2em;
@@ -153,16 +205,16 @@
     cursor: pointer;
     display: inline-block;
     transition: background-color 0.3s ease;
-    width: 8em;
+    width: 8.5em;
     text-align: center;
 }
 
-#header .menu .user-dropdown > a:hover {
+#header .user-dropdown > a:hover {
     background-color: #2c2c2c;
     color: #afafaf;
 }
 
-#header .menu .user-dropdown-menu {
+#header .user-dropdown-menu {
     display: none;
     position: absolute;
     top: 110%;
@@ -177,24 +229,24 @@
     z-index: 100;
 }
 
-#header .menu .user-dropdown-menu li {
+#header .user-dropdown-menu li {
     padding: 0.5em 1em;
     margin-left: 0;
 }
 
-#header .menu .user-dropdown-menu li a {
+#header .user-dropdown-menu li a {
     text-decoration: none;
     color: #333;
     display: block;
     transition: background 0.3s;
 }
 
-#header .menu .user-dropdown-menu li a:hover {
+#header .user-dropdown-menu li a:hover {
     background: #f2f2f2;
 }
 
 /* 활성화 시 표시 */
-#header .menu .user-dropdown-menu.show {
+#header .user-dropdown-menu.show {
     display: flex;
     justify-content: space-around;
     flex-direction: row;
@@ -204,7 +256,7 @@
     font-size: 16px;
 }
 
-#header .menu .user-dropdown-menu.show .aff_name {
+#header .user-dropdown-menu.show .aff_name {
     position: absolute;
     display: flex;
     justify-content: flex-start;
@@ -216,7 +268,7 @@
 /* ==============================
    로그인 버튼
 ============================== */
-#header .menu li .login_btn {
+#header .login_btn {
     color: #0077cc;
     cursor: pointer;
 }
@@ -351,6 +403,38 @@ main {
     transform: rotate(-45deg) translate(5px,-5px);
 }
 
+@media (min-width: 993px) {
+    #header .header-container {
+        width: 1170px;
+        margin: 0 auto;
+    }
+}
+
+/* ==============================
+   브레드크럼 헤더
+============================== */
+.breadcrumb-container {
+    height: 44px;
+    border-bottom: #a6d7ff solid 1px;
+    list-style: none;
+    width: 100%;    
+    display: flex;
+    align-items: center;
+    padding: 0 10%;
+}
+
+.breadcrumb-container .breadcrumb {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.breadcrumb-container .breadcrumb li{
+    margin: 0 2em;
+    align-items: center;
+    list-style: none;
+}
+
 /* ==============================
    반응형
 ============================== */
@@ -421,7 +505,7 @@ main {
     }
 
     /* 로그인 시 드랍메뉴 */
-    #header .menu .user-dropdown-menu {
+    #header .user-dropdown-menu {
         left: -50px;            /* 왼쪽 여백 */
         flex-direction: column;
         background: #fff;
@@ -431,13 +515,13 @@ main {
         z-index: 2000;         /* 햄버거 메뉴보다 위 */
     }
 
-    #header .menu .user-dropdown-menu.show {
+    #header .user-dropdown-menu.show {
         display: flex;
         width: 240px;
         font-size: 16px;
     }
     
-    #header .menu .user-dropdown-menu.show li a {
+    #header .user-dropdown-menu.show li a {
         font-size: 12px;
     }
 }

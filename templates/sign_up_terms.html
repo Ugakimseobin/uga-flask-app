@@ -6,7 +6,7 @@
 <div class="terms-page">
     <div class="container">
         <h2>회원가입 약관 동의</h2>
-        <form method="POST" id="termsForm">
+        <form method="POST" id="termsForm" action="{{ url_for('sign_up_terms') }}">
             
             <!-- 전체 동의 -->
             <label class="custom-check">
@@ -14,14 +14,115 @@
                 <span class="checkmark"></span> 전체 동의
             </label>
 
-            <h3>서비스 이용약관 (필수)</h3>
+            <h3>서비스 이용약관 <span>*필수</span></h3>
             <div class="terms-box">
                 <p>
                     본 서비스는 회원에게 다양한 기능을 제공합니다. 회원은 서비스를 정상적으로 이용하기 위해 
                     회사의 정책을 준수해야 하며, 타인의 권리를 침해해서는 안됩니다.
                 </p>
+                <p>
+                    [의료기기 판매·사용 안내 동의]<br>
+                    본 서비스에서 제공하는 제품은 「의료기기법」에 따른 의료기기로서, 사용 시 반드시 제품에 동봉된 사용설명서 및 주의사항을 숙지하시기 바랍니다.  
+                    회사는 구매자의 사용 부주의로 발생하는 문제에 대해서는 책임을 지지 않습니다.  
+                    본인은 상기 내용을 충분히 이해하고 동의합니다.
+                </p>
+                <p>
+                    [청약철회 및 환불 규정 동의]<br>
+                    전자상거래법 제17조 및 동법 시행령 제21조에 따라, 소비자는 제품 수령 후 7일 이내에 청약철회를 요청할 수 있습니다.  
+                    단, 다음의 경우에는 환불이 불가합니다.  
+                    - 제품이 멸실·훼손된 경우  
+                    - 제품을 개봉하여 사용하여 가치가 현저히 감소한 경우  
+                    - 맞춤형 제작 제품 등 소비자 요청에 의해 개별적으로 생산된 경우
+                </p>
+                <p>
+                    [개인정보 보관 및 법정 의무 보관 동의]<br>
+                    회사는 전자상거래법, 전자금융거래법 등 관련 법령에 따라 거래 관련 기록을 일정 기간 보관합니다.  
+                    - 계약 또는 청약철회 기록: 5년  
+                    - 대금 결제 및 재화 공급 기록: 5년  
+                    - 소비자 불만 및 분쟁 처리 기록: 3년
+                </p>
+                <p>
+                    [전자적 전송·고지 동의]<br>
+                    본인은 회사가 제공하는 계약 체결, 결제, 배송, 환불, 고객 안내 등의 고지를 전자우편, 문자메시지, 앱 알림 등 전자적 방식으로 수신하는 것에 동의합니다.
+                </p>
             </div>
-            <div class="terms-list">
+            <label class="custom-check">
+                <input type="checkbox" class="agree_required" name="agree_terms">
+                <span class="checkmark"></span> 서비스 이용약관 동의 (필수)
+            </label>
+            <h3>개인정보 수집 및 이용 <span>*필수</span></h3>
+            <div class="terms-box">
+                <p>
+                    [개인정보 수집 및 이용 동의서]<br>
+                    본인은 “주식회사 유가”(이하 “회사”)가 회원가입 및 서비스 제공을 위하여 아래와 같이 개인정보를 수집·이용하는 것에 동의합니다.
+                </p>
+                <p>
+                    1. 수집 항목<br>
+                    - 필수: 성명, 이메일, 비밀번호, 휴대전화번호, 주소<br>
+                    - 선택: 직책/직함, 상세주소, 전화번호
+                </p>
+                <p>
+                    2. 수집 및 이용 목적<br>
+                    - 회원 식별 및 본인 확인<br>
+                    - 서비스 제공 및 회원 관리<br>
+                    - 주문/배송 처리 및 정산<br>
+                    - 고객 문의 응대 및 CS 처리<br>
+                    - 마케팅 및 프로모션 정보 제공 (선택동의 시)<br>
+                    - 서비스 개선 및 내부 통계 활용
+                </p>
+                <p>
+                    3. 보유 및 이용 기간<br>
+                    - 회원 탈퇴 시까지 보유<br>
+                    - 거래 내역, 환불/분쟁 기록은 전자상거래법에 따라 5년간 보관<br>
+                    - 마케팅 정보 수신 동의 철회 시 별도 동의 시까지 보관
+                </p>
+                <p>
+                    4. 동의 거부 및 불이익 안내<br>
+                    - 위 개인정보 수집 및 이용에 동의하지 않을 경우 회원가입이 제한되거나 서비스 이용이 불가할 수 있습니다.<br>
+                    - 다만, 선택항목(예: 마케팅 정보)은 동의 거부 시에도 회원가입은 가능하며 단지 마케팅 정보 제공에 대한 동의만 철회됩니다.
+                </p>
+                <p>
+                    5. 개인정보 제3자 제공 및 위탁<br>
+                    - 회사는 원활한 서비스 제공을 위해 다음과 같이 개인정보 처리업무를 제3자에게 위탁할 수 있으며, 아래와 같이 제공할 수 있습니다:<br>
+                      * 배송 업체(예: 택배사)<br>
+                      * 결제 대행사(PG)<br>
+                      * CS 응대를 위한 외부 업체<br>
+                    - 위탁 또는 제3자 제공 시 목적, 제공 항목, 보유 기간 등의 내용을 사전 또는 별도 안내드립니다.
+                </p>
+                <p>
+                    6. 동의 철회 방법<br>
+                    - 회원은 언제든지 개인정보 수집 및 이용 동의를 철회할 수 있으며, 동의 철회는 로그인 후 “개인정보 설정 → 개인정보 수집동의 철회” 메뉴 또는 고객센터를 통해 가능합니다.<br>
+                    - 동의 철회 시에는 일부 서비스의 제공이 제한될 수 있습니다.
+                </p>
+                <p>
+                    7. 회원의 권리 및 행사 방법<br>
+                    - 회원은 개인정보에 대한 열람, 정정, 삭제, 처리정지 등의 권리를 언제든지 행사할 수 있습니다.<br>
+                    - 관련 요청은 고객센터 또는 마이페이지 → 개인정보 변경 화면을 통해 가능합니다.<br>
+                    - 개인정보 오류의 정정을 요청할 경우, 회사는 정정 완료 시까지 해당 개인정보를 이용 또는 제공하지 않습니다.
+                </p>
+                <p>
+                    8. 개인정보 보호 책임자<br>
+                    이름 : <br>
+                    전화번호 : <br>
+                    이메일 :
+                </p>
+            </div>
+            <label class="custom-check">
+                <input type="checkbox" class="agree_required" name="agree_privacy">
+                <span class="checkmark"></span> 개인정보 수집 및 이용 동의 (필수)
+            </label>
+            <h3>선택적 마케팅/광고 수신 동의</h3>
+            <div class="terms-box">
+                <p>
+                    선택 동의 시, 이메일/문자/앱 알림 등으로 이벤트 및 프로모션 정보를 받을 수 있습니다.
+                </p>
+            </div>
+            <label class="custom-check">
+                <input type="checkbox" class="agree_optional" name="agree_marketing">
+                <span class="checkmark"></span> 선택적 마케팅/광고 수신 동의 (선택)
+            </label>
+
+            <!--<div class="terms-list">
                 <label class="custom-check">
                     <input type="checkbox" class="agree_required" name="agree_terms">
                     <span class="checkmark"></span> 서비스 이용약관 (필수)
@@ -36,9 +137,9 @@
                     <input type="checkbox" class="agree_optional" name="agree_marketing">
                     <span class="checkmark"></span> 선택적 마케팅/광고 수신 동의 (선택)
                 </label>
-            </div>
+            </div>-->
 
-            <button type="submit" id="toSignupBtn">동의 후 회원가입</button>
+            <button type="submit" id="toSignupBtn" >동의 후 회원가입</button>
         </form>
     </div>
 </div>

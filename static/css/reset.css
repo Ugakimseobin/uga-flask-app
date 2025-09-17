@@ -1,0 +1,50 @@
+.reset-page, .reset-token-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+    background: #f9f9f9;
+}
+
+.reset-page .container, .reset-token-page .container {
+    width: 100%;
+    max-width: 400px;
+    padding: 2em;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.reset-page h2, .reset-token-page h2 {
+    margin-bottom: 1em;
+    text-align: center;
+    color: #333;
+}
+
+.reset-page form input, .reset-token-page form input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 1em;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.reset-page form button, .reset-token-page form button {
+    width: 100%;
+    padding: 14px;
+    background: #0077cc;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.reset-page form button:hover, .reset-token-page form button:hover {
+    background: #005fa3;
+}
+
+.flash.success { color: green; margin-top: 10px; text-align: center; }
+.flash.danger { color: red; margin-top: 10px; text-align: center; }

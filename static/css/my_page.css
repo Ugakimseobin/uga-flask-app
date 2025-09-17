@@ -111,3 +111,39 @@
     padding-left: 20px;
     margin-top: 8px;
 }
+
+/* 페이지네이션 */
+.pagination {
+    margin-top: 15px;
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    align-items: center;
+}
+
+.page-link {
+    padding: 6px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #fff;
+    color: #0078ff;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.page-link:hover {
+    background: #0078ff;
+    color: #fff;
+}
+
+.page-link.active {
+    background: #0078ff;
+    color: #fff;
+    font-weight: bold;
+    pointer-events: none;
+}
+
+.ellipsis {
+    padding: 6px 10px;
+    color: #888;
+}
