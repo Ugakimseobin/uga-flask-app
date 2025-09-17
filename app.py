@@ -226,6 +226,26 @@ def prettify_segment(seg):
     # 하이픈/언더바를 공백으로 변경
     return SEGMENT_NAME_MAP.get(seg, seg.replace('-', ' ').replace('_', ' ').title())
 
+
+def generate_breadcrumb(extra=None):
+    """
+    URL path 기반으로 브레드크럼 생성
+    extra: 추가 항목 (현재 페이지 이름 등)
+    """
+    path_segments = request.path.strip('/').split('/')
+    breadcrumb = [("홈", url_for('home'))] if path_segments else []
+
+    url_accum = ''
+    for seg in path_segments:
+        url_accum += '/' + seg
+        name = SEGMENT_NAME_MAP.get(seg, seg)
+        breadcrumb.append((name, url_accum))
+
+    if extra:
+        breadcrumb.append(extra)
+
+    return breadcrumb
+
 # -----------------------------
 # 배너 관련 함수
 # -----------------------------
@@ -327,7 +347,7 @@ def my_page():
     user_id = session.get('user_id')
     user = User.query.get(user_id)
     user_aff = session.get('user_aff', '')
-
+    breadcrumb = generate_breadcrumb()
     page = request.args.get('page', 1, type=int)
     per_page = 5
 
@@ -336,7 +356,7 @@ def my_page():
     else:
         orders_pagination = Order.query.filter_by(user_id=user_id).order_by(Order.created_at.desc()).paginate(page=page, per_page=per_page, error_out=False)
 
-    return render_template('my_page.html', user=user, pagination=orders_pagination)
+    return render_template('my_page.html', user=user, pagination=orders_pagination, breadcrumb=breadcrumb)
 
 @app.route('/my_page/orders_data')
 def orders_data():
@@ -614,6 +634,7 @@ def product_page():
 
     user_aff = session.get('user_aff')
 
+
     return render_template(
         'product.html',
         products=products,
@@ -651,12 +672,17 @@ def get_product_image(product_id):
     
 #    return render_template('product_detail.html', product=product, breadcrumb=breadcrumb)
 
-@app.route('/product/<int:product_id>')
+@app.route('/products/<int:product_id>')
 def product_detail(product_id):
-    product = Product.query.get_or_404(product_id)
-    user_id = session.get('user_id')
-    user_aff = session.get('user_aff')  # 세션에서 가져오기
-    return render_template('product_detail.html', product=product, user_id=user_id, user_aff=user_aff)
+    product = Product.query.get(product_id)
+    if not product:
+        flash("상품을 찾을 수 없습니다.")
+        return redirect(url_for('products'))
+
+    # 브레드크럼 생성
+    breadcrumb = generate_breadcrumb(extra=(product.name, None))
+
+    return render_template('product_detail.html', product=product, breadcrumb=breadcrumb)
 
 # 카트에 상품 추가
 @app.route('/add_to_cart', methods=['POST'])
@@ -1008,6 +1034,7 @@ def sign_up_terms():
 
 @app.route('/sign_up', methods=['GET', 'POST'])
 def sign_up():
+    breadcrumb = generate_breadcrumb()
     # 약관 동의 안 한 상태라면 접근 금지
     if not session.get('agree_terms') or not session.get('agree_privacy'):
         flash("회원가입을 위해 필수 약관에 동의해야 합니다.", "warning")
@@ -1058,7 +1085,7 @@ def sign_up():
             db.session.rollback()
             return f'에러 발생: {str(e)}', 500
 
-    return render_template('sign_up.html')
+    return render_template('sign_up.html',breadcrumb=breadcrumb)
 
 # 비밀번호 변경
 @app.route('/reset_password', methods=['GET', 'POST'])

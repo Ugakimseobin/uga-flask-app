@@ -25,7 +25,7 @@
     {% include 'header.html' %}
 
     <!-- 브레드크럼 (페이지별 위치 표시) -->
-    {% if breadcrumb %}
+    {% if breadcrumb and breadcrumb|length > 0 %}
     <div class="breadcrumb">
         {% for name, url in breadcrumb %}
             {% if url %}
