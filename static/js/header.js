@@ -28,37 +28,21 @@ document.addEventListener('DOMContentLoaded', () => {
     // =====================
     // 드롭다운 (데스크탑 클릭)
     // =====================
-    document.querySelectorAll('.dropdown > .dropdown-toggle').forEach(toggle => {
+    const dropdownToggles = document.querySelectorAll('.menu li.dropdown > a');
+
+    dropdownToggles.forEach(toggle => {
         toggle.addEventListener('click', (e) => {
-            if (window.innerWidth > 992) {
-                e.preventDefault();
-                const parent = toggle.parentElement;
+            e.preventDefault();
+            const parentLi = toggle.parentElement;
+            const dropdown = toggle.nextElementSibling;
 
-                // 다른 드롭다운 닫기
-                document.querySelectorAll('.dropdown').forEach(d => {
-                    if (d !== parent) d.classList.remove('open');
-                });
+            // 다른 드롭다운은 닫기
+            document.querySelectorAll('.menu li.dropdown .dropdown-menu').forEach(menu => {
+                if(menu !== dropdown) menu.classList.remove('show');
+            });
 
-                // 현재 메뉴 토글
-                parent.classList.toggle('open');
-            }
-        });
-    });
-
-    // 카테고리(2단계) 클릭
-    document.querySelectorAll('.dropdown-menu .category > a').forEach(catToggle => {
-        catToggle.addEventListener('click', (e) => {
-            if (window.innerWidth > 992) {
-                e.preventDefault();
-                const parent = catToggle.parentElement;
-
-                // 다른 카테고리 닫기
-                document.querySelectorAll('.dropdown-menu .category').forEach(c => {
-                    if (c !== parent) c.classList.remove('open');
-                });
-
-                parent.classList.toggle('open');
-            }
+            // 현재 드롭다운 토글
+            dropdown.classList.toggle('show');
         });
     });
 

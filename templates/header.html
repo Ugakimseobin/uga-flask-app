@@ -24,7 +24,22 @@
                 </li>
                 <li class="dropdown">
                     <a href="javascript:void(0)" class="dropdown-toggle">상품</a>
-                    
+                    <ul class="dropdown-menu">
+                        <li class="category">
+                            <a href="javascript:void(0)">카테고리1</a>
+                            <div class="dropdown-sub-menu">
+                                <a href="javascript:void(0)">항목1</a>
+                                <a href="javascript:void(0)">항목2</a>
+                            </div>
+                        </li>
+                        <li class="category">
+                            <a href="javascript:void(0)">카테고리2</a>
+                            <div class="dropdown-sub-menu">
+                                <a href="javascript:void(0)">항목1</a>
+                                <a href="javascript:void(0)">항목2</a>
+                            </div>
+                        </li>
+                    </ul>
                 </li>
 
 
@@ -99,19 +114,3 @@
         {% endif %}
     </ul>
 </nav>
-
-<div class="product-panel">
-    <div class="category-section">
-        <ul class="category-list">
-            <!-- JS에서 동적으로 추가 -->
-        </ul>
-        <ul class="sub-category-list" style="display:none;">
-            <!-- JS에서 동적으로 추가 -->
-        </ul>
-    </div>
-
-    <div class="product-right" style="display:none;">
-        <h3 id="selected-sub-category"></h3>
-        <div class="product-list"></div>
-    </div>
-</div>
