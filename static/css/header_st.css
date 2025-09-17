@@ -190,6 +190,41 @@
     padding: 12px 0px;
 }
 
+
+/* 상품 패널 */
+.product-panel {
+    display: flex;
+    gap: 1em;
+    margin: 20px 10%;
+}
+
+#product-left {
+    width: 300px;
+}
+
+#product-left ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+#product-left li {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #ddd;
+}
+
+#product-left li:hover {
+    background-color: #f0f0f0;
+}
+
+#product-right {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
 /* ==============================
    로그인 시 드랍다운
 ============================== */
